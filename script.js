@@ -68,9 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-let couter = parseInt(localStorage.getItem("couter"));
-let active = parseInt(localStorage.getItem("active"));
-let completed = parseInt(localStorage.getItem("completed"));
+let couter = parseInt(localStorage.getItem("couter")) || 0;
+let active = parseInt(localStorage.getItem("active")) || 0;
+let completed = parseInt(localStorage.getItem("completed")) || 0;
 
 const btn = document.getElementById("btn");
 const input = document.getElementById("note");
@@ -93,7 +93,7 @@ btn.addEventListener("click", (event) => {
         let d = new Date();
         let date = d.toUTCString();
         li.innerHTML = `<input type="checkbox" class="check" /> ${value}<span class="date">${date}</span>`;
-        noteList.appendChild();
+        noteList.appendChild(li);
         localStorage.setItem("couter", couter);
         localStorage.setItem(couter, "0|" + li.innerHTML);
         localStorage.setItem("active", active += 1);
