@@ -14,8 +14,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     line-height: 1.5;
-    overflow-x: hidden;
-    overflow-y: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 0em;
 }
 
 #note {
@@ -24,7 +26,7 @@ body {
     border: none;
     outline: none;
     font-family: cascadia-code, monospace;
-    font-size: 14px;
+    font-size: 15px;
     padding: 0;
     margin: 0;
     width: 100%;
@@ -39,7 +41,7 @@ body {
 
 button {
     background-color: #7b7d7f;
-    color: #363333;
+    color: #fefefe;
     border: none;
     outline: none;
     font-family: cascadia-code, monospace;
@@ -64,6 +66,26 @@ button {
     backdrop-filter: blur(10px);
 }
 
+#util-form {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.25rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 3rem;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    /* On pousse tout le contenue d'apres de 0.25rem */
+    margin-bottom: 3rem;
+}
+
+#notes {
+    padding: 3rem 0rem;
+    font-size: medium;
+}
+
 .check {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
@@ -80,6 +102,24 @@ button {
     padding: 0;
     box-sizing: border-box;
     border-radius: 3px;
+}
+
+.check:checked {
+    animation: rotate 1.5s forwards;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 ul {
@@ -122,4 +162,33 @@ ul {
     border-radius: 3px;
     /* on aligne la date a droite */
     float: right;
+}
+
+#clear {
+    margin-left: auto;
+}
+
+#util {
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    font-size: large;
+    padding-top: 0.25rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#delete_div {
+    position: absolute;
+}
+
+#deleter {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 0.25rem 1rem;
+    margin: 0.25rem;
+    border-radius: 0.5rem;
 }

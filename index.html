@@ -1,21 +1,26 @@
 <!-- Créer le template de base d'une page -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icon.ico">
-    <title>Note</title>
+    <title>Tasks</title>
 </head>
 <body>
     <ul id="notes"></ul>
-    <form id="note-form">
-        <button id="btn">Add</button>
-        <input type="text" name="note" placeholder="Note" id="note">
+    <form id="util-form">
+        <label id="util">Tasks : 0 | Completed : 0 | Active : 0</label>
         <button id="clear">Clear</button>
     </form>
+    <form id="note-form">
+        <input type="text" name="note" placeholder="Type your task here" id="note">
+        <button id="btn">Add</button>
+    </form>
+    <div id="delete_div" class="hidden">
+        <button id="deleter">Delete</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
