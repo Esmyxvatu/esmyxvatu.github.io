@@ -112,15 +112,39 @@ btn.addEventListener("click", (event) => {
                 localStorage.setItem("completed", completed);
                 active -= 1;
                 localStorage.setItem("active", active);
-                localStorage.setItem(key, `1|${li.innerHTML}`);
+                localStorage.setItem(couter, `1|${li.innerHTML}`);
             } else {
                 completed -= 1;
                 localStorage.setItem("completed", completed);
                 active += 1;
                 localStorage.setItem("active", active);
-                localStorage.setItem(key, `0|${li.innerHTML}`);
+                localStorage.setItem(couter, `0|${li.innerHTML}`);
             }
             util.innerText = `Tasks : ${couter} | Completed : ${completed} | Active : ${active}`;
+        });
+        li.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            dele.classList.toggle("hidden");
+            dele.style.top = li.offsetTop + "px";
+            dele.style.left = event.clientX + "px";
+
+            del.addEventListener("click", (event) => {
+                event.preventDefault();
+                let checkbox = li.querySelector("input[type='checkbox']");
+                li.remove();
+                localStorage.removeItem(couter);
+                couter -= 1;
+                localStorage.setItem("couter", couter);
+                if (checkbox.checked) {
+                    completed -= 1;
+                    localStorage.setItem("completed", completed);
+                } else {
+                    active -= 1;
+                    localStorage.setItem("active", active);
+                }
+                util.innerText = `Tasks : ${couter} | Completed : ${completed} | Active : ${active}`;
+                dele.classList.toggle("hidden");
+            });
         });
         util.innerText = `Tasks : ${couter} | Completed : ${completed} | Active : ${active}`;
     }
