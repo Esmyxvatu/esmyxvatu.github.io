@@ -192,3 +192,12 @@ ul {
     margin: 0.25rem;
     border-radius: 0.5rem;
 }
+
+@media screen and (max-width: 550px) {
+    #util {
+        font-size: small;
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;
+        margin-top: 0rem;
+    }
+}
