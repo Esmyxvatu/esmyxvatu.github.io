@@ -20,8 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let checkbox = li.querySelector(
                     "input[type='checkbox']"
                 );
-                checkbox.addEventListener('click', (event) => {
-                    event.preventDefault();
+                checkbox.addEventListener('click', (event) => {le 
                     li.classList.toggle("checked");
                     console.log("CLICK CHECKBOX");
                 });
