@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (event.target != checkbox) {
                     checkbox.checked = !checkbox.checked;
                 }
-                checkbox.checked = !checkbox.checked;
                 if (checkbox.checked) {
                     completed += 1;
                     localStorage.setItem("completed", completed);
