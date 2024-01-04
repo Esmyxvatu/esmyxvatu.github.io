@@ -14,16 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             li.addEventListener("click", (event) => {
-                console.log("CLICK LI")
                 event.stopPropagation();
                 li.classList.toggle("checked");
                 let checkbox = li.querySelector(
                     "input[type='checkbox']"
                 );
-                checkbox.addEventListener('click', (event) => {le 
-                    li.classList.toggle("checked");
-                    console.log("CLICK CHECKBOX");
-                });
+                if (event.target != checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                }
                 checkbox.checked = !checkbox.checked;
                 if (checkbox.checked) {
                     completed += 1;
@@ -101,11 +99,9 @@ btn.addEventListener("click", (event) => {
             event.stopPropagation();
             li.classList.toggle("checked");
             let checkbox = li.querySelector("input[type='checkbox']");
-            checkbox.addEventListener("click", (event) => {
-                li.classList.toggle("checked");
-                console.log(event);
-            });
-            checkbox.checked = !checkbox.checked;
+            if (event.target != (checkbox)) {
+                checkbox.checked = !checkbox.checked;
+            }
             if (checkbox.checked) {
                 completed += 1;
                 localStorage.setItem("completed", completed);
