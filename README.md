@@ -1,1 +1,1 @@
-Just a small site for taking notes.
+Small site where i present my projects and other stuffs.

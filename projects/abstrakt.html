@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Esmyxvatu - Abstrakt</title>
+
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <header>
+            <button onclick="location.href='/index.html'">Home</button>
+            <h2>Abstrakt</h2>
+            <button onclick="location.href='https://github.com/Esmyxvatu/abstrakt'">Github</button>
+        </header>
+        <p>A simple esolang made in GoLang.</p>
+
+        <h2>Syntax</h2>
+        <main class="code">
+            <h3>Comment :</h3>
+            <pre><code class="comment">:: this is a comment</code></pre>
+
+            <h3>Variables :</h3>
+            <pre><code><span class="keyword2">data</span> <span class="keyword">string</span> <span class="variable">name</span> = <span class="string">"value"</span></code></pre>
+            <h4>Constante :</h4>
+            <pre><code><span class="keyword2">data</span> <span class="keyword">fixed string</span> <span class="variable">name</span> = <span class="string">"value"</span></code></pre>
+
+            <h3>Output :</h3>
+            <pre><code><span class="function">manifest</span>(<span class="variable">name</span>)</code></pre>
+
+            <h3>Input :</h3>
+            <pre><code><span class="keyword2">data</span> <span class="keyword">string</span> <span class="variable">name</span> = <span class="function">ingest</span>(<span class="string">"enter your name: "</span>)</code></pre>
+
+            <h3>Loop :</h3>
+            <h4>For :</h4>
+            <pre><code><span class="keyword2">explore</span> <span class="variable">i</span> = <span class="number">0</span> <span class="keyword2">amidst</span> <span class="function">range</span>(<span class="number">10</span>) {
+    <span class="function">manifest</span>(<span class="variable">i</span>)
+}</code></pre>
+            <h4>While :</h4>
+            <pre><code><span class="keyword2">data</span> <span class="keyword">int</span> <span class="variable">i</span> = <span class="number">0</span>
+<span class="keyword2">persist until</span> <span class="variable">i</span> = <span class="number">10</span> {
+    <span class="function">manifest</span>(<span class="variable">i</span>)
+    <span class="keyword2">mutate</span> <span class="variable">i</span> = <span class="variable">i</span> + <span class="number">1</span>
+}</code></pre>
+
+            <h3>If, Else, Else if :</h3>
+            <pre><code><span class="keyword2">upon condition</span> <span class="variable">name</span> == <span class="string">"value"</span> {
+    <span class="function">manifest</span>(<span class="variable">name</span>)
+} <span class="keyword2">alternatively if</span> <span class="variable">name</span> != <span class="string">"value"</span> {
+    <span class="function">manifest</span>(<span class="variable">name</span>)
+} <span class="keyword2">otherwise</span> {
+    <span class="function">manifest</span>(<span class="variable">name</span>)
+}
+            </code></pre>
+
+            <h3>Functions :</h3>
+            <pre><code><span class="keyword2">method</span> <span class="function">sum</span>(<span class="variable">a</span>, <span class="variable">b</span>) {
+    <span class="function">return</span>(<span class="variable">a</span> + <span class="variable">b</span>)
+}</code></pre>
+
+            <h3>Class :</h3>
+            <pre><code><span class="keyword2">group</span> <span class="function">Person</span> {
+    <span class="keyword2">method</span> <span class="function">setup</span>(<span class="variable">age</span>, <span class="variable">name</span>) {
+        <span class="keyword2">data</span> <span class="keyword">int</span> <span class="variable">age</span>
+        <span class="keyword2">data</span> <span class="keyword">string</span> <span class="variable">name</span>
+    }
+
+    <span class="keyword2">method</span> <span class="function">getAge</span>() {
+        <span class="function">return</span>(<span class="variable">age</span>)
+    }
+
+    <span class="keyword2">method</span> <span class="function">getName</span>() {
+        <span class="function">return</span>(<span class="variable">name</span>)
+    }
+}
+
+<span class="keyword2">data</span> <span class="keyword">string</span> <span class="variable">someone</span> = <span class="function">Person</span>(<span class="number">21</span>, <span class="string">"Esmyxvatu"</span>)
+<span class="function">manifest</span>(<span class="variable">someone</span>.<span class="function">getAge</span>())
+</code></pre>
+
+            <h3>Import / Export :</h3>
+            <pre><code><span class="keyword2">intake</span> <span class="function">name</span> from <span class="string">"name.abstrakt"</span>
+<span class="keyword2">outtake</span>(<span class="function">name1</span>, <span class="function">name2</span>)</code></pre>
+        </main>
+    </body>
+</html>
