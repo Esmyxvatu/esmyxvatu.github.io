@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Neon Clock</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0A0A0A;
+            
+            --color: orange;
+            --intensity: 20px;
+            --size: 48px;
+        }
+    
+        #clock {
+            color: var(--color);
+            font-size: var(--size);
+            font-family: "Press Start 2P", monospace;
+            text-shadow: 0 0 var(--intensity) var(--color), 1px 1px 0 color-mix(in srgb, var(--color) 50%, white 50%), 2px 2px 0 color-mix(in srgb, var(--color) 50%, black 50%);
+            transition: all 2s ease;
+        }
+        
+        #param {
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            
+            color: white;
+        }
+        
+        #param p {
+            margin: 0;
+        }
+        
+        svg {
+            transition: transform 2s ease;
+        }
+        svg:hover {
+            transform: rotate(360deg);
+        }
+        
+        .separator {
+            animation: ease-in-out 2s infinite clign;
+        }
+        
+        @keyframes clign {
+            0%, 100% {
+                opacity: 100%;
+            }
+            50% {
+                opacity: 5%;
+            }
+        }
+        
+        @keyframes warmup {
+          0% { opacity: 0; }   /* Départ au maximum */
+          10% { opacity: 0.2; } /* Descente rapide */
+          20% { opacity: 0.5; } /* Point le plus bas */
+          30% { opacity: 0.3; } /* Remonte légèrement */
+          40% { opacity: 0.6; }   /* Retour au maximum */
+          50% { opacity: 0.4; } /* Petite descente */
+          60% { opacity: 0.7; } /* Chute importante */
+          70% { opacity: 0.5; } /* Remonte un peu */
+          80% { opacity: 0.8; } /* Redescend un peu */
+          90% { opacity: 0.6; } /* Remonte presque au max */
+          100% { opacity: 1; }  /* Retour au maximum */
+        }
+        
+        @keyframes blink {
+          0% { opacity: 1; }   /* Départ au maximum */
+          10% { opacity: 0.4; } /* Descente rapide */
+          20% { opacity: 0.1; } /* Point le plus bas */
+          30% { opacity: 0.6; } /* Remonte légèrement */
+          40% { opacity: 1; }   /* Retour au maximum */
+          50% { opacity: 0.8; } /* Petite descente */
+          60% { opacity: 0.2; } /* Chute importante */
+          70% { opacity: 0.5; } /* Remonte un peu */
+          80% { opacity: 0.3; } /* Redescend un peu */
+          90% { opacity: 0.7; } /* Remonte presque au max */
+          100% { opacity: 1; }  /* Retour au maximum */
+        }
+        
+        .menu {
+            margin-top: 5px;
+            padding: 4px;
+            border-radius: 5px;
+            
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        
+        input, select {
+            background: black;
+            border: none;
+            outline: none;
+            color: whitesmoke;
+            width: 10ch;
+            border-radius: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>    
+    <div id="clock" style="opacity: 0;">        
+        <span id="hours"></span><span class="separator">:</span><span id="minutes"></span><span class="separator">.</span><span id="seconds"></span>
+    </div>
+    
+    <div id="param">
+        <i data-lucide="cog" onclick="document.querySelector('.menu').classList.toggle('hidden')"></i>
+        
+        <div class="menu hidden">
+            <div style="display: flex; align-items: center; gap:4px;">
+                <p>Neon color:</p>
+                <input type="color" id="color_picker" onchange="updateClock()">
+            </div>
+            
+            <div style="display: flex; align-items: center; gap:4px;">
+                <p>Neon brightness:</p>
+                <input type="number" id="brightness_picker" onchange="updateClock()">
+            </div>
+            
+            <div style="display: flex; align-items: center; gap:4px;">
+                <p>Format: </p>
+                <select id="format_picker" onchange="updateClock()">
+                    <option selected value="24">24h</option>
+                    <option value="12">12h</option>
+                </select>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap:4px;">
+                <p>Neon Size:</p>
+                <input type="number" id="size_picker" onchange="updateClock()">
+            </div>
+            
+            <div style="display: flex; align-items: center; gap:4px;">
+                <p>Screen saver:</p>
+                <input type="checkbox" id="mode_picker" onchange="updateClock()">
+            </div>
+        </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+      
+      let start = true;
+      let information = localStorage.getItem("information");
+     
+      if (information == null) {
+        information = { color: "#e5a50a", intensity: "20", format: "24", size: "48" };
+      } else {
+        information = JSON.parse(information);
+      }
+      
+      document.getElementById("color_picker").value = information["color"];
+      document.getElementById("brightness_picker").value = information["intensity"];
+      document.getElementById("format_picker").value = information["format"];
+      document.getElementById("size_picker").value = information["size"];
+
+
+      updateClock();
+      function updateClock() {
+        information["color"] = document.getElementById("color_picker").value;
+        document.querySelector("body").style.setProperty("--color", information["color"]);
+        
+        information["intensity"] = document.getElementById("brightness_picker").value;
+        document.querySelector("body").style.setProperty("--intensity", information["intensity"] + "px");
+        
+        information["size"] = document.getElementById("size_picker").value;
+        document.querySelector("body").style.setProperty("--size", information["size"] + "px");
+        
+        information["format"] = document.getElementById("format_picker").value;
+        
+        if (document.getElementById("mode_picker").checked) {
+          document.querySelector("body").style.filter = "brightness(0.2)";
+          document.querySelector("body").style.setProperty("background-color", "black");
+        } else {
+          document.querySelector("body").style.filter = "";
+          document.querySelector("body").style.setProperty("background-color", "#0A0A0A");
+        }
+        
+        localStorage.setItem("information", JSON.stringify(information));
+      }
+    
+      setInterval(() => {
+        let date = new Date();
+        let hours = String(date.getHours()).padStart(2, "0");
+        
+        if (information["format"] == "12") {
+          let timed = "AM ";
+          
+          if (date.getHours() > 12) {
+            timed = "PM ";
+            hours = timed + String(date.getHours() - 12).padStart(2, "0");
+          } else {
+            hours = timed + String(date.getHours()).padStart(2, "0");
+          }
+        }
+        
+        let number = Math.random();
+        
+        if (number <= 0.05) {
+          document.getElementById("hours").style.animation = "blink 2s ease";
+        } else if (number <= 0.1) {
+          document.getElementById("minutes").style.animation = "blink 2s ease";
+        } else if (number <= 0.15) {
+          document.getElementById("seconds").style.animation = "blink 2s ease";
+        }
+      
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = String(date.getMinutes()).padStart(2, "0");
+        document.getElementById("seconds").innerText = String(date.getSeconds()).padStart(2, "0");
+        
+        if (start) {
+          start = false;
+          
+          document.getElementById("clock").style.animation = "warmup 2s ease";
+          document.getElementById("clock").style.opacity = 1;
+        }
+      }, 100);
+    </script>
+</body>
+</html>
